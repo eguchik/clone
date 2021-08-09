@@ -4,7 +4,7 @@ const db = require('../models');
 
 router.get('/', async function(req, res) {
   const users = await db.user.findAll();
-  res.render('index', { title: 'ホーム', users: users });
+  res.render('index', { title: 'ホーム', users: users, loginUser: req.user});
 });
 
 module.exports = router;

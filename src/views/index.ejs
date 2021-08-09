@@ -5,11 +5,15 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <% if (loginUser) { %>
+      <h2>Hi <%= loginUser.name %>!! You are now logged in.</h2>
+      <hr>
+    <% } %>
     <h1>ユーザーリスト</h1>
     <% for(var i = 0; i < users.length; i++) { %>
-    <p><%= users[i].id %></p>
-    <p><%= users[i].name %></p>
-    <hr>
+      <p><%= users[i].id %></p>
+      <p><%= users[i].name %></p>
+      <hr>
     <% } %>
 
     <form action="/create" method="POST">

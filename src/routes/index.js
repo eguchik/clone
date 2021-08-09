@@ -1,9 +1,10 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const db = require('../models');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', async function(req, res) {
+  const users = await db.user.findAll();
+  res.render('index', { title: 'ホーム', users: users });
 });
 
 module.exports = router;

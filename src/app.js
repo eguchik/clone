@@ -22,6 +22,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+
+const db = require('./models');
+app.post('/create', async function(req, res) {
+  const newUser = db.user.build({
+    name: req.body.name,
+    password: req.body.password,
+    emal: req.body.email
+  });
+  await newUser.save();
+  res.redirect('/');
+});
+
+
+
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

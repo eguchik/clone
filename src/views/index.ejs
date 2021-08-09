@@ -11,6 +11,13 @@
     <p><%= users[i].name %></p>
     <hr>
     <% } %>
+
+    <form action="/create" method="POST">
+      <p>name: <input type="text" name="name"></p>
+      <p>password: <input type="password" name="password"></p>
+      <p>email: <input type="text" name="email"></p>
+      <button type="submit">Create User</button>
+    </form>
     
   </body>
 </html>

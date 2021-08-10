@@ -46,9 +46,10 @@ app.post('/tweet', async function(req, res) {
   res.redirect('/');
 });
 
-app.get('/test', (req, res) => {
-  res.send(req.user);
-})
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 
 

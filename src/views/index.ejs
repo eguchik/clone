@@ -10,17 +10,15 @@
       <hr>
     <% } %>
     <h1>ユーザーリスト</h1>
-    <% for(var i = 0; i < users.length; i++) { %>
-      <p><%= users[i].id %></p>
-      <p><%= users[i].name %></p>
+    <% for(var i = 0; i < tweets.length; i++) { %>
+      <p><%= tweets[i].user_id %></p>
+      <p><%= tweets[i].tweet %></p>
       <hr>
     <% } %>
 
-    <form action="/create" method="POST">
-      <p>name: <input type="text" name="name"></p>
-      <p>password: <input type="password" name="password"></p>
-      <p>email: <input type="text" name="email"></p>
-      <button type="submit">Create User</button>
+    <form action="/tweet" method="POST">
+      <p>tweet: <input type="text" name="tweet"></p>
+      <button type="submit">つぶやく</button>
     </form>
     
   </body>

@@ -8,31 +8,25 @@ module.exports = {
       'users',
       [
         {
-          name: 'Alice',
-          emal: 'Alice@gmail.com',
+          name: 'Oskar',
+          emal: 'oskar@gmail.com',
           password: 'p@ssword',
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          name: 'Iris',
-          emal: 'Iris@gmail.com',
+          name: 'Corneria',
+          emal: 'corneria@gmail.com',
           password: 'p@ssword',
           created_at: new Date(),
           updated_at: new Date(),
         },
         {
-          name: 'Jane',
-          emal: 'Jane@gmail.com',
+          name: 'Harol',
+          emal: 'harol@gmail.com',
           created_at: new Date(),
           updated_at: new Date(),
-        },
-        {
-          name: 'Ruis',
-          emal: 'Ruis@gmail.com',
-          created_at: new Date(),
-          updated_at: new Date(),
-        },
+        }
       ],
       {}
     );

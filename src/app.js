@@ -37,15 +37,18 @@ app.use('/login', loginRouter);
 
 
 const db = require('./models');
-app.post('/create', async function(req, res) {
-  const newUser = db.user.build({
-    name: req.body.name,
-    password: req.body.password,
-    emal: req.body.email
+app.post('/tweet', async function(req, res) {
+  const newTweet = db.tweets.build({
+    user_id: req.user.id,
+    tweet: req.body.tweet,
   });
-  await newUser.save();
+  await newTweet.save();
   res.redirect('/');
 });
+
+app.get('/test', (req, res) => {
+  res.send(req.user);
+})
 
 
 

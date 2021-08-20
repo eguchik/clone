@@ -2,29 +2,52 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
   <body>
     <% if (loginUser) { %>
-      <h2>Hi <%= loginUser.name %>!! You are now logged in.</h2>
-      <p><a href="/logout">ログアウト</a></p>
-      <hr>
-    <% } %>
-    <% if (!loginUser) { %>
-      <p><a href="/login">ログイン</a></p>
-      <hr>
+    <h2>Hi <%= loginUser.name %>!! You are now logged in.</h2>
+    <p><a href="/logout">ログアウト</a></p>
+    <hr />
+    <% } %> <% if (!loginUser) { %>
+    <p><a href="/login">ログイン</a></p>
+    <hr />
     <% } %>
     <h1>ユーザーリスト</h1>
+    <ul id="messages"></ul>
     <% for(var i = 0; i < tweets.length; i++) { %>
-      <p><%= tweets[i].user_id %></p>
-      <p><%= tweets[i].tweet %></p>
-      <hr>
+    <p><%= tweets[i].user_id %></p>
+    <p><%= tweets[i].tweet %></p>
+    <hr />
     <% } %>
 
-    <form action="/tweet" method="POST">
-      <p>tweet: <input type="text" name="tweet"></p>
-      <button type="submit">つぶやく</button>
+    <form id="form" action="">
+      <p>tweet: <input id="input" autocomplete="off" /></p>
+      <button>つぶやく</button>
     </form>
-    
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+
+      var form = document.getElementById("form");
+      var input = document.getElementById("input");
+
+      form.addEventListener("submit", (event) => {
+        // formのactionで指定したurlに飛ぶというデフォルトの処理を阻害する。
+        event.preventDefault();
+        if (input.value) {
+          socket.emit("chat message", input.value);
+          input.value = "";
+        }
+      });
+
+      socket.on("chat message", (msg) => {
+        var item = document.createElement("li");
+        item.textContent = msg;
+        messages.prepend(item);
+        window.scrollTo(0, 0);
+      });
+    </script>
   </body>
 </html>

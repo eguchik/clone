@@ -14,7 +14,9 @@
     <hr />
     <% } %>
     <h1>ユーザーリスト</h1>
-    <ul id="messages"></ul>
+
+    <div id="message"></div>
+
     <% for(var i = 0; i < tweets.length; i++) { %>
     <p><%= tweets[i].user_id %></p>
     <p><%= tweets[i].tweet %></p>
@@ -29,23 +31,27 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
-
       var form = document.getElementById("form");
       var input = document.getElementById("input");
+      var message = document.getElementById("message");
 
       form.addEventListener("submit", (event) => {
         // formのactionで指定したurlに飛ぶというデフォルトの処理を阻害する。
         event.preventDefault();
         if (input.value) {
-          socket.emit("chat message", input.value);
+          socket.emit("chat message", { user_id: 11, tweet: input.value });
           input.value = "";
         }
       });
 
       socket.on("chat message", (msg) => {
-        var item = document.createElement("li");
-        item.textContent = msg;
-        messages.prepend(item);
+        var newId = document.createElement("p");
+        newId.textContent = msg.user_id;
+        message.appendChild(newId);
+
+        var newTweet = document.createElement("p");
+        newTweet.textContent = msg.tweet;
+        message.appendChild(newTweet);
         window.scrollTo(0, 0);
       });
     </script>
